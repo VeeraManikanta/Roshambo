@@ -10,16 +10,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+   
+
+    @IBAction func performRock(_ sender: Any) {
+        var controller: ResultViewController
+        controller = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        controller.result = 1
+        present(controller, animated: true, completion: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func performScissor(_ sender: Any) {
+        
+        performSegue(withIdentifier: "performPaper", sender: self)
     }
-
-
+    
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "performScissor" {
+            let controller = segue.destination as! ResultViewController
+            controller.result = 3
+            present(controller, animated: true, completion: nil)
+           
+        }
+    }
 }
 
